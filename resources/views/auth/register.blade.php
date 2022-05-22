@@ -4,9 +4,9 @@
 <head>
     <title>Animated Login Form</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-</head> 
+</head>
 <style>
     .i {
         color: #d9d9d9;
@@ -66,7 +66,9 @@
     .input-div.focus>.i>i {
         color: #38d39f;
     }
-</style> 
+
+</style>
+
 <body class="bg-gray-300" style="font-family: Roboto;">
     <div class="h-screen flex justify-center items-center">
         <div class="bg-white rounded-lg w-2/5 px-16 py-16">
@@ -84,7 +86,8 @@
                     </div>
                     <div class="div">
                         <h5>Name</h5>
-                        <input type="text" name="name" class="absolute w-full h-full py-2 px-3 outline-none inset-0 text-gray-700"
+                        <input type="text" name="name"
+                            class="absolute w-full h-full py-2 px-3 outline-none inset-0 text-gray-700"
                             style="background:none;">
                     </div>
                 </div>
@@ -95,7 +98,8 @@
                     </div>
                     <div class="div">
                         <h5>Email</h5>
-                        <input type="email" name="email" class="absolute w-full h-full py-2 px-3 outline-none inset-0 text-gray-700"
+                        <input type="email" name="email"
+                            class="absolute w-full h-full py-2 px-3 outline-none inset-0 text-gray-700"
                             style="background:none;">
                     </div>
                 </div>
