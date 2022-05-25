@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nav-svg {
+    background-image: '/storage/assets/nav.svg';
+}
+
+[x-cloak] {
+    display: none;
+}

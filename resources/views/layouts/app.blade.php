@@ -20,6 +20,8 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    @livewireStyles
 </head>
 
 <body class="antialiased">
@@ -32,6 +34,7 @@
             </div>
         </div>
     </div>
+    @livewireScripts
 </body>
 
 </html>
