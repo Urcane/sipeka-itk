@@ -7,9 +7,13 @@ use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\NumberColumn;
+use Mediconesystems\LivewireDatatables\TimeColumn;
 
 class DeathDataTable extends LivewireDatatable
 {
+
+    public $beforeTableSlot = 'components.deathdata-button';
+
     public function builder()
     {
         return DeathData::query()
@@ -22,6 +26,8 @@ class DeathDataTable extends LivewireDatatable
             Column::index($this),
 
             Column::name('full_name')
+                ->minWidth(200)
+                ->maxWidth(200)
                 ->label('Nama Lengkap')
                 ->searchable(),
 
@@ -50,6 +56,8 @@ class DeathDataTable extends LivewireDatatable
                 ->filterable(),
 
             Column::name('address')
+                ->minWidth(200)
+                ->maxWidth(200)
                 ->label('Alamat')
         ];
     }

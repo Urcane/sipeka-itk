@@ -16,7 +16,7 @@ class CreateDeathDataTable extends Migration
         Schema::create('death_data', function (Blueprint $table) {
             $table->id();
             $table->foreignId('family_card_id')->constrained();
-            $table->bigInteger('NIK')->index();
+            $table->bigInteger('NIK')->unique()->index();
             $table->string('full_name')->index();
             $table->enum('religion', ['Islam', 'Kristen', 'Budha', 'Hindu', 'Konghucu', 'Katolik'])->index();
             $table->string('birth_place')->index();

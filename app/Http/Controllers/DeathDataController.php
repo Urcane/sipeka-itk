@@ -34,7 +34,10 @@ class DeathDataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "fullname" => ['required', 'max:25'],
+            "family_card_number" => ['required']
+        ])
     }
 
     /**

@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/death_data', [DeathDataController::class, 'index'])->name('death_data');
+    // Route::get('/death_data', [DeathDataController::class, 'index'])->name('death_data');
+
+    Route::resource('/death_data', DeathDataController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

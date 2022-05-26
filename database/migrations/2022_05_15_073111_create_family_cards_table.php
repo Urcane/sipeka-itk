@@ -16,7 +16,7 @@ class CreateFamilyCardsTable extends Migration
         Schema::create('family_cards', function (Blueprint $table) {
             $table->id();
             $table->string('head_family_name')->index();
-            $table->bigInteger('family_card_number')->index();
+            $table->bigInteger('family_card_number')->unique()->index();
             $table->string('family_card_file_url');
             $table->timestamps();
         });
