@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DeathDataController;
+use App\Http\Controllers\FamilyCardController;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/death_data', [DeathDataController::class, 'index'])->name('death_data');
 
     Route::resource('/death_data', DeathDataController::class);
+    Route::resource('/family_card', FamilyCardController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

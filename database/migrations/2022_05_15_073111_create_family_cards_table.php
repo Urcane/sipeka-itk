@@ -17,7 +17,7 @@ class CreateFamilyCardsTable extends Migration
             $table->id();
             $table->string('head_family_name')->index();
             $table->bigInteger('family_card_number')->unique()->index();
-            $table->string('family_card_file_url');
+            $table->string('family_card_file_url')->nullable();
             $table->timestamps();
         });
     }

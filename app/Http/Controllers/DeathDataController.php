@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FamilyCard;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class DeathDataController extends Controller
 {
@@ -36,8 +38,35 @@ class DeathDataController extends Controller
     {
         $this->validate($request, [
             "fullname" => ['required', 'max:25'],
-            "family_card_number" => ['required']
-        ])
+            "family_card_number" => [
+                'required',
+                'integer',
+                'exists:family_cards,family_card_number'
+            ],
+            "NIK" => [
+                'required',
+                'integer',
+            ],
+            "religion" => [
+                "required",
+                Rule::in(["Islam", "Kristen", "Budha", "Hindu", "Konghucu", "Katolik"]),
+            ],
+            "birth_place" => [
+                "required",
+            ],
+            "birthdate" => [
+                "required",
+                "date"
+            ],
+            "deathdate" => [
+                "required",
+                "date"
+            ],
+            "address" => [
+                "required",
+                "max:255"
+            ]
+        ]);
     }
 
     /**

@@ -58,7 +58,7 @@
                         @csrf
                         <div class="flex gap-10 px-6 py-10">
                             <div class="grid grid-cols-4 gap-4">
-                                {{-- <input x-model="contact.id" type="hidden" name="id" placeholder="" value=""> --}}
+                                <input x-model="family_cards.id" type="hidden" name="family_card_id" placeholder="" value="">
                                 <div class="flex items-center">
                                     <label for="name">Nama Lengkap</label>
                                     <span class="text-red-500 text-sm">*</span>
@@ -75,7 +75,7 @@
                                     <span class="text-red-500 text-sm">*</span>
                                 </div>
                                 <div class="grid col-span-3">
-                                    <input x-model="deathdata.family_card_number" class="rounded-md border border-gray-300 p-2" type="text" name="family_card_number" id="family_card_number" placeholder="6421xxxxxxxxx" value="{{ old('family_card_number') }}">
+                                    <input x-model="family_cards.family_card_number" class="rounded-md border border-gray-300 p-2" type="text" name="family_card_number" id="family_card_number" placeholder="6421xxxxxxxxx" value="{{ old('family_card_number') }}">
 
                                     @error('family_card_number')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>
