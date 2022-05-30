@@ -3,12 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Models\FamilyCard;
+use Illuminate\Support\Facades\Log;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\NumberColumn;
+use Mediconesystems\LivewireDatatables\Traits\CanPinRecords;
 
 class FamilyCardTable extends LivewireDatatable
 {
+    use CanPinRecords;
 
     public $beforeTableSlot = 'components.family-card-button';
 
@@ -20,6 +23,8 @@ class FamilyCardTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::checkbox(),
+
             Column::name('id')
                 ->label('ID')
                 ->minWidth(20)
@@ -38,11 +43,30 @@ class FamilyCardTable extends LivewireDatatable
                 ->searchable()
                 ->alignCenter(),
 
-            Column::callback(['id'], function ($id) {
-                return $id;
+            Column::callback(['family_cards.id', 'head_family_name', 'family_card_number', 'family_card_file_url'], function ($id, $head_family_name, $family_card_number, $family_card_file_url) {
+                return view('components.family-card-action', [
+                    'id' => $id, 
+                    'head_family_name' => $head_family_name, 
+                    'family_card_number' => $family_card_number, 
+                    'family_card_file_url' => $family_card_file_url
+                ]);
             })
                 ->label('Action')
                 ->alignCenter(),
         ];
+    }
+
+    public function deleteFamilyCard($id)
+    {
+        try {
+            FamilyCard::where('id', $id)->delete();
+
+            redirect('/family_card')->with('statusMessage', "Kamu Berhasil Menghapus data!");
+        } catch (\Throwable $th) {
+            Log::info($th);
+
+            redirect('/family_card')->with('statusMessage', "Terjadi Kesalahan: " . substr($th, 0, 50));
+        }
+        
     }
 }

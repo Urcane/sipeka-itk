@@ -36,7 +36,12 @@ Route::middleware('auth')->group(function () {
     // Route::get('/death_data', [DeathDataController::class, 'index'])->name('death_data');
 
     Route::resource('/death_data', DeathDataController::class);
-    Route::resource('/family_card', FamilyCardController::class);
+    // Route::resource('/family_card', FamilyCardController::class);
+    Route::group(['prefix' => '/family_card'], function() {
+        Route::get('/', [FamilyCardController::class, "index"])->name('family_card.index');
+        Route::post('/', [FamilyCardController::class, "store"])->name('family_card.store');
+        Route::put('/update', [FamilyCardController::class, "update"])->name('family_card.update');
+    });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
