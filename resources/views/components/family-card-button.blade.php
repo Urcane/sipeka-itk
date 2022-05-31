@@ -51,11 +51,10 @@
                         <h6 class="text-xl font-bold">Add New Family Card</h6>
                         <button type="button" @click="close">✖</button>
                     </div>
-                    <form actions="{{route('family_card.store')}}" method="POST">
+                    <form actions="{{route('family_card.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="flex gap-10 px-6 py-10">
                             <div class="grid grid-cols-4 gap-4">
-                                <input x-model="family_cards.id" type="hidden" name="family_card_id" placeholder="" value="">
                                 <div class="flex items-center">
                                     <label for="head_family_name">Nama Kepala Keluarga</label>
                                     <span class="text-red-500 text-sm">*</span>
@@ -82,7 +81,7 @@
                                     <label for="family_card_file">File Kartu Keluarga</label>
                                 </div>
                                 <div class="grid col-span-3">
-                                    <input class="rounded-md border border-gray-300 p-2" type="file" name="family_card_file" id="family_card_file" placeholder="" value="{{ old('family_card_file') }}">
+                                    <input class="rounded-md border border-gray-300 p-2" type="file" name="family_card_file" id="family_card_file" accept=".pdf,.jpeg,.jpg,.png" value="{{ old('family_card_file') }}">
 
                                     @error('family_card_file')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>
@@ -144,9 +143,8 @@
                         <button type="button" @click="close">✖</button>
                     </div>
                     <template x-on:update-family-card.window="family_cards = $event.detail.data; open();"></template>
-                    <form actions="{{route('family_card.update')}}" method="POST">
+                    <form actions="{{route('family_card.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="flex gap-10 px-6 pt-10 pb-5">
                             <div class="grid grid-cols-4 gap-4">
                                 <input x-model="family_cards.id" type="hidden" name="family_card_id" placeholder="" value="">
@@ -176,7 +174,7 @@
                                     <label for="family_card_file">File Kartu Keluarga</label>
                                 </div>
                                 <div class="grid col-span-3">
-                                    <input class="rounded-md border border-gray-300 p-2" type="file" name="family_card_file" id="family_card_file" placeholder="" value="{{ old('family_card_file') }}">
+                                    <input class="rounded-md border border-gray-300 p-2" type="file" name="family_card_file" id="file" accept=".pdf,.jpeg,.jpg,.png">
 
                                     @error('family_card_file')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>
@@ -208,7 +206,7 @@
                                             1. 
                                             </th>
                                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                                                <a x-bind:href="family_cards.family_card_file_url" x-html="family_cards.family_card_file_url" class="text-indigo-700 hover:text-indigo-500" target="_blank"></a>
+                                                <a x-bind:href="'./file/' + family_cards.family_card_file_url" x-html="family_cards.family_card_file_url" class="text-indigo-700 hover:text-indigo-500" target="_blank"></a>
                                             </th>
                                         </tr>
                                     </tbody>
