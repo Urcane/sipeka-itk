@@ -44,8 +44,8 @@
                             </div>
 
                             <div class="mx-5">
-                                <h4 class="text-2xl font-semibold text-gray-700">8,282</h4>
-                                <div class="text-gray-500">New Users</div>
+                                <h4 class="text-2xl font-semibold text-gray-700">2</h4>
+                                <div class="text-gray-500">Data Kematian Hari ini</div>
                             </div>
                         </div>
                     </div>
@@ -68,8 +68,8 @@
                             </div>
 
                             <div class="mx-5">
-                                <h4 class="text-2xl font-semibold text-gray-700">200,521</h4>
-                                <div class="text-gray-500">Total Orders</div>
+                                <h4 class="text-2xl font-semibold text-gray-700">12</h4>
+                                <div class="text-gray-500">Data Kematian Minggu Ini</div>
                             </div>
                         </div>
                     </div>
@@ -88,8 +88,8 @@
                             </div>
 
                             <div class="mx-5">
-                                <h4 class="text-2xl font-semibold text-gray-700">215,542</h4>
-                                <div class="text-gray-500">Available Products</div>
+                                <h4 class="text-2xl font-semibold text-gray-700">27</h4>
+                                <div class="text-gray-500">Data Kematian Bulan ini</div>
                             </div>
                         </div>
                     </div>

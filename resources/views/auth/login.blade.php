@@ -102,7 +102,7 @@
                 </div>
                 <a href="#" class="text-xs text-green-400 hover:text-green-500 float-right mb-4">Forgot Password?</a>
                 <button type="submit"
-                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none">Button</button>
+                    class="w-full py-2 rounded-full bg-green-600 text-gray-100  focus:outline-none">Login</button>
             </form>
         </div>
     </div>
