@@ -24,8 +24,8 @@ class FamilyCardController extends Controller
 
         if (isset($request->family_card_id)) {
             $rules['family_card_number'] = [
-                'required', 
-                'integer', 
+                'required',
+                'integer',
                 Rule::unique('family_cards', 'family_card_number')
                     ->ignore($request->family_card_id),
             ];
@@ -36,22 +36,21 @@ class FamilyCardController extends Controller
         try {
             $familyCard = FamilyCard::updateOrCreate([
                 "id" => $request->family_card_id,
-            ],[
+            ], [
                 "head_family_name" => $request->head_family_name,
                 "family_card_number" => $request->family_card_number
             ]);
-    
+
             if ($request->hasFile('family_card_file')) {
                 $filename = auth()->id() . '_' . $familyCard->id .  '_'  . $request->file('family_card_file')->getClientOriginalName();
-                
+
                 $request->file('family_card_file')->move(public_path('file'), $filename);
-    
+
                 $familyCard->family_card_file_url = $filename;
                 $familyCard->save();
             }
 
             return view('pages.family-card')->with('statusMessage', "Horray, Berhasil menambahkan / update kartu keluarga!");
-
         } catch (\Throwable $th) {
             Log::error($th);
 
@@ -76,9 +75,9 @@ class FamilyCardController extends Controller
 
     //         if ($request->file('family_card_file') != NULL) {
     //             $filename = auth()->id() . '_' . time() . '_' . $request->file('family_card_file')->extension();
-    
+
     //             $request->file('family_card_file')->move(public_path('file'), $filename);
-    
+
     //             $familyCard->family_card_url = $filename;
     //         }
     //         $familyCard->save();

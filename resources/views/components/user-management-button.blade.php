@@ -1,32 +1,18 @@
     <!-- Modal Import Contact One by One-->
     <div
         x-data="{
-            deathdata: {
+            user: {
                 id: null,
                 fullname: null,
-                family_card_id: null,
-                family_card_number: null,
-                NIK: null,
-                religion: null,
-                birth_place: null,
-                birthdate: null,
-                deathdate: null,
-                address: null
+                family_card_id: null
             },
             show: false,
             close() {
                 this.show = false,
-                this.deathdata = {
+                this.user = {
                     id: null,
                     fullname: null,
-                    family_card_id: null,
-                    family_card_number: null,
-                    NIK: null,
-                    religion: null,
-                    birth_place: null,
-                    birthdate: null,
-                    deathdate: null,
-                    address: null
+                    family_card_id: null
                 }
             },
             open() {
@@ -42,7 +28,7 @@
                         <path d="M23 12c0-3.037-1.232-5.789-3.222-7.778s-4.741-3.222-7.778-3.222-5.789 1.232-7.778 3.222-3.222 4.741-3.222 7.778 1.232 5.789 3.222 7.778 4.741 3.222 7.778 3.222 5.789-1.232 7.778-3.222 3.222-4.741 3.222-7.778zM21 12c0 2.486-1.006 4.734-2.636 6.364s-3.878 2.636-6.364 2.636-4.734-1.006-6.364-2.636-2.636-3.878-2.636-6.364 1.006-4.734 2.636-6.364 3.878-2.636 6.364-2.636 4.734 1.006 6.364 2.636 2.636 3.878 2.636 6.364zM8 13h3v3c0 0.552 0.448 1 1 1s1-0.448 1-1v-3h3c0.552 0 1-0.448 1-1s-0.448-1-1-1h-3v-3c0-0.552-0.448-1-1-1s-1 0.448-1 1v3h-3c-0.552 0-1 0.448-1 1s0.448 1 1 1z"></path>
                         </symbol>
                 </svg>
-                New Death Data
+                New User
             </button>
 
             <!-- overlay -->
@@ -60,124 +46,57 @@
                     @click.away="close"
                 >
                     <div class="flex justify-between items-center border-b text-lg px-6 py-3">
-                        <h6 class="text-xl font-bold">Add New Death Data</h6>
+                        <h6 class="text-xl font-bold">Add New User</h6>
                         <button type="button" @click="close">✖</button>
                     </div>
-                    <form actions="{{route('death_data.store')}}" method="POST">
-                    <template x-on:update-deathdata.window="deathdata = $event.detail.data; open(); console.log($event.detail.data)"></template>
+                    <form actions="{{route('user-management.store')}}" method="POST">
+                    <template x-on:update-user.window="user = $event.detail.data; open(); console.log($event.detail.data)"></template>
                         @csrf
                         <div class="flex gap-10 px-6 py-10">
                             <div class="grid grid-cols-4 gap-4">
-                                <input x-model="deathdata.id" type="hidden" name="family_card_id" placeholder="" value="">
+                                <input x-model="user.id" type="hidden" name="user_id" placeholder="" value="">
                                 <div class="flex items-center">
                                     <label for="name">Nama Lengkap</label>
                                     <span class="text-red-500 text-sm">*</span>
                                 </div>
                                 <div class="grid col-span-3">
-                                    <input x-model="deathdata.fullname" class="rounded-md border border-gray-300 p-2" type="text" name="fullname" id="fullname" placeholder="John Scarlett" value="{{ old('fullname') }}">
+                                    <input x-model="user.name" class="rounded-md border border-gray-300 p-2" type="text" name="name" id="name" placeholder="John Scarlett" value="{{ old('name') }}">
 
-                                    @error('fullname')
+                                    @error('name')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="flex items-center">
-                                    <label for="number">No. Kartu Keluarga</label>
+                                    <label for="email">Email</label>
                                     <span class="text-red-500 text-sm">*</span>
                                 </div>
                                 <div class="grid col-span-3">
-                                    {{-- <input x-model="deathdata.family_card_number" class="rounded-md border border-gray-300 p-2" type="text" name="family_card_number" id="family_card_number" placeholder="6421xxxxxxxxx" value="{{ old('family_card_number') }}"> --}}
+                                    <input x-model="user.email" class="rounded-md border border-gray-300 p-2" type="email" name="email" id="email" placeholder="john.doe@gmail.com" value="{{ old('email') }}">
 
-                                    {{-- @livewire('component.death-data-select-input-component', ['label' => 'No. Kartu Keluarga', 'name' => 'family_card_id']) --}}
-
-                                    <livewire:component.death-data-select-input-component label='No. Kartu Keluarga' name='family_card_id'/>
-                                    @error('family_card_id')
+                                    @error('email')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="flex items-center">
-                                    <label for="provider_id">NIK</label>
+                                    <label for="password">New Password</label>
                                     <span class="text-red-500 text-sm">*</span>
                                 </div>
                                 <div class="grid col-span-3">
-                                    <input x-model="deathdata.NIK" class="rounded-md border border-gray-300 p-2" type="text" name="NIK" id="NIK" placeholder="6421xxxxxxxx" value="{{ old('NIK') }}">
+                                    <input class="rounded-md border border-gray-300 p-2" type="password" name="password" id="password" placeholder="*****" value="{{ old('password') }}">
 
-                                    @error('NIK')
-                                        <div class="text-red-400 text-xs">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="flex items-center">
-                                    <label for="department">Agama</label>
-                                    <span class="text-red-500 text-sm">*</span>
-                                </div>
-                                <div class="grid col-span-3">
-                                    <select x-model="deathdata.religion" name="religion" id="religion" class="rounded-md border border-gray-300 p-2">
-                                        <option value="Islam">
-                                            Islam
-                                        </option>
-                                        <option value="Kristen">
-                                            Kristen
-                                        </option>
-                                        <option value="Budha">
-                                            Budha
-                                        </option>
-                                        <option value="Hindu">
-                                            Hindu
-                                        </option>
-                                        <option value="Konghucu">
-                                            Konghucu
-                                        </option>
-                                        <option value="Katolik">
-                                            Katolik
-                                        </option>
-                                    </select>
-                                    @error('religion')
-                                        <div class="text-red-400 text-xs">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="flex items-center">
-                                    <label for="employee_status">Tempat Lahir</label>
-                                    <span class="text-red-500 text-sm">*</span>
-                                </div>
-                                <div class="grid col-span-3">
-                                    <input x-model="deathdata.birth_place" class="rounded-md border border-gray-300 p-2" type="text" name="birth_place" id="birth_place" placeholder="Penajam" value="{{ old('birth_place') }}">
-
-                                    @error('birth_place')
+                                    @error('password')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="flex items-center">
-                                    <label for="employee_status">Tanggal Lahir</label>
+                                    <label for="password_confirmation">Confirm Password</label>
                                     <span class="text-red-500 text-sm">*</span>
                                 </div>
                                 <div class="grid col-span-3">
-                                    <input x-model="deathdata.birthdate" class="rounded-md border border-gray-300 p-2" type="date" name="birthdate" id="birthdate" value="{{ old('birthdate') }}">
+                                    <input class="rounded-md border border-gray-300 p-2" type="password" name="password_confirmation" id="password_confirmation" placeholder="*******">
 
-                                    @error('birthdate')
-                                        <div class="text-red-400 text-xs">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="flex items-center">
-                                    <label for="employee_status">Tanggal Kematian</label>
-                                    <span class="text-red-500 text-sm">*</span>
-                                </div>
-                                <div class="grid col-span-3">
-                                    <input x-model="deathdata.deathdate" class="rounded-md border border-gray-300 p-2" type="date" name="deathdate" id="deathdate" value="{{ old('deathdate') }}">
-
-                                    @error('deathdate')
-                                        <div class="text-red-400 text-xs">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="flex items-center">
-                                    <label for="employee_status">Alamat</label>
-                                    <span class="text-red-500 text-sm">*</span>
-                                </div>
-                                <div class="grid col-span-3">
-                                    <input x-model="deathdata.address" class="rounded-md border border-gray-300 p-2" type="text" name="address" id="address" placeholder="Jln. xxxxxxxxxx" value="{{ old('address') }}">
-
-                                    @error('address')
+                                    @error('password_confirmation')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -224,14 +143,14 @@
                         </div>
                         <div class="flex gap-10 px-6 py-10">
                             <div class=" w-full items-center justify-center bg-grey-lighter">
-                                <h4>Yakin nih mau hapus Data Kematian ini ?</h4>
+                                <h4>Yakin nih mau hapus User ini ?</h4>
                             </div>
                         </div>
                         <div class="flex justify-end items-center border-t text-lg px-6 py-3">
                             <button type="button" 
                                     class="bg-green-500 px-6 py-2 rounded-md text-white font-semibold focus:outline-none focus:ring-2 focus:ring-blue-200 grid mr-5"
                                     :class="deleteConfirmState ? 'grid-cols-2 px-6 cursor-not-allowed disabled:opacity-40' : 'px-10'"
-                                    x-on:click="deleteConfirmState = true; $wire.deleteDeathdata(selectedId);"
+                                    x-on:click="deleteConfirmState = true; $wire.deleteUser(selectedId);"
                                     x-bind:disabled="deleteConfirmState"
                                 >
                                 <svg x-show="deleteConfirmState" class="z-10 animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
