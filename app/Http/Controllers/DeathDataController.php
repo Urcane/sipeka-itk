@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeathData;
 use App\Models\FamilyCard;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class DeathDataController extends Controller
@@ -36,12 +39,19 @@ class DeathDataController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info($request);
+
+
         $this->validate($request, [
             "fullname" => ['required', 'max:25'],
-            "family_card_number" => [
+            "family_card_id" => [
                 'required',
-                'integer',
-                'exists:family_cards,family_card_number'
+                'array',
+            ],
+            "family_card_id.*" => isset($request->death_data_id) ? [
+                'exists:family_cards,id,' . $request->death_data_id
+            ] : [
+                'exists:family_cards,id'
             ],
             "NIK" => [
                 'required',
@@ -67,6 +77,21 @@ class DeathDataController extends Controller
                 "max:255"
             ]
         ]);
+
+        DeathData::updateOrCreate([
+            'id' => $request->death_data_id
+        ], [
+            'full_name' => $request->fullname,
+            'family_card_id' => $request->family_card_id[0],
+            'NIK' => $request->NIK,
+            'religion' => $request->religion,
+            'birth_place' => $request->birth_place,
+            'birthdate' => Carbon::parse($request->birthdate),
+            'deathdate' => Carbon::parse($request->deathdate),
+            'address' => $request->address
+        ]);
+
+        return redirect('/death_data')->with('statusMassage', 'Berhasil Hore!!');
     }
 
     /**
