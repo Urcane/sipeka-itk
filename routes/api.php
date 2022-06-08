@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\DeathDataDaily;
+use App\Models\DeathDataMonthly;
+use App\Models\DeathDataWeekly;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +21,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::get('/dataBulan', function (Request $request) {
-    return 2;
+    $monthly = DeathDataMonthly::orderBy('date', 'desc')->first()->count;
+
+    return response($monthly);
+});
+Route::get('/dataMingguan', function (Request $request) {
+    $weekly = DeathDataWeekly::orderBy('weekly', 'desc')->first()->count;
+
+    return response($weekly);
+});
+Route::get('/dataHarian', function (Request $request) {
+    $daily = DeathDataDaily::orderBy('date', 'desc')->first()->count;
+
+    return response($daily);
 });

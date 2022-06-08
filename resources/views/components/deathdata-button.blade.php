@@ -68,7 +68,7 @@
                         @csrf
                         <div class="flex gap-10 px-6 py-10">
                             <div class="grid grid-cols-4 gap-4">
-                                <input x-model="deathdata.id" type="hidden" name="family_card_id" placeholder="" value="">
+                                <input x-model="deathdata.id" type="hidden" name="death_data_id" placeholder="" value="">
                                 <div class="flex items-center">
                                     <label for="name">Nama Lengkap</label>
                                     <span class="text-red-500 text-sm">*</span>

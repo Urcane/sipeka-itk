@@ -4,6 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DeathDataController;
 use App\Http\Controllers\FamilyCardController;
 use App\Http\Controllers\UserController;
+use App\Models\DeathData;
+use App\Models\DeathDataDaily;
+use App\Models\DeathDataMonthly;
+use App\Models\DeathDataWeekly;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +35,15 @@ Route::post('/login', [AuthController::class, 'login'])->name('attemptLogin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $daily = DeathDataDaily::orderBy('date', 'desc')->first();
+        $weekly = DeathDataWeekly::orderBy('weekly', 'desc')->first();
+        $monthly = DeathDataMonthly::orderBy('date', 'desc')->first();
+
+        return view('dashboard', [
+            'daily' => $daily,
+            'weekly' => $weekly,
+            'monthly' => $monthly
+        ]);
     })->name('dashboard');
 
     // Route::get('/death_data', [DeathDataController::class, 'index'])->name('death_data');

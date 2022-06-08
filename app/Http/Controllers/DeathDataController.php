@@ -39,23 +39,19 @@ class DeathDataController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info($request);
-
-
-        $this->validate($request, [
+        $rules = [
             "fullname" => ['required', 'max:25'],
             "family_card_id" => [
                 'required',
                 'array',
             ],
-            "family_card_id.*" => isset($request->death_data_id) ? [
-                'exists:family_cards,id,' . $request->death_data_id
-            ] : [
+            "family_card_id.*" => [
                 'exists:family_cards,id'
             ],
             "NIK" => [
                 'required',
                 'integer',
+                'unique:death_data,NIK'
             ],
             "religion" => [
                 "required",
@@ -76,7 +72,17 @@ class DeathDataController extends Controller
                 "required",
                 "max:255"
             ]
-        ]);
+        ];
+
+        if (isset($request->death_data_id)) {
+            $rules['NIK'] = [
+                'required',
+                'integer',
+                Rule::unique('death_data', 'NIK')->ignore($request->death_data_id)
+            ];
+        }
+
+        $this->validate($request, $rules);
 
         DeathData::updateOrCreate([
             'id' => $request->death_data_id
