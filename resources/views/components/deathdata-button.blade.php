@@ -1,22 +1,32 @@
     <!-- Modal Import Contact One by One-->
     <div
         x-data="{
-            contact: {
+            deathdata: {
                 id: null,
-                name: null,
-                number: null,
-                department: null,
-                provider_id: null,
+                fullname: null,
+                family_card_id: null,
+                family_card_number: null,
+                NIK: null,
+                religion: null,
+                birth_place: null,
+                birthdate: null,
+                deathdate: null,
+                address: null
             },
             show: false,
             close() {
                 this.show = false,
-                this.contact = {
+                this.deathdata = {
                     id: null,
-                    name: null,
-                    number: null,
-                    department: null,
-                    provider_id: null,
+                    fullname: null,
+                    family_card_id: null,
+                    family_card_number: null,
+                    NIK: null,
+                    religion: null,
+                    birth_place: null,
+                    birthdate: null,
+                    deathdate: null,
+                    address: null
                 }
             },
             open() {
@@ -54,11 +64,11 @@
                         <button type="button" @click="close">✖</button>
                     </div>
                     <form actions="{{route('death_data.store')}}" method="POST">
-                    <template x-on:update-contact.window="contact = $event.detail.data; open();"></template>
+                    <template x-on:update-deathdata.window="deathdata = $event.detail.data; open();"></template>
                         @csrf
                         <div class="flex gap-10 px-6 py-10">
                             <div class="grid grid-cols-4 gap-4">
-                                <input x-model="family_cards.id" type="hidden" name="family_card_id" placeholder="" value="">
+                                <input x-model="deathdata.id" type="hidden" name="family_card_id" placeholder="" value="">
                                 <div class="flex items-center">
                                     <label for="name">Nama Lengkap</label>
                                     <span class="text-red-500 text-sm">*</span>
@@ -75,9 +85,14 @@
                                     <span class="text-red-500 text-sm">*</span>
                                 </div>
                                 <div class="grid col-span-3">
-                                    <input x-model="family_cards.family_card_number" class="rounded-md border border-gray-300 p-2" type="text" name="family_card_number" id="family_card_number" placeholder="6421xxxxxxxxx" value="{{ old('family_card_number') }}">
+                                    {{-- <input x-model="deathdata.family_card_number" class="rounded-md border border-gray-300 p-2" type="text" name="family_card_number" id="family_card_number" placeholder="6421xxxxxxxxx" value="{{ old('family_card_number') }}"> --}}
 
-                                    @error('family_card_number')
+                                    {{-- @livewire('component.death-data-select-input-component', ['label' => 'No. Kartu Keluarga', 'name' => 'family_card_id']) --}}
+
+                                    
+
+                                    <livewire:component.death-data-select-input-component label='No. Kartu Keluarga' name='family_card_id'/>
+                                    @error('family_card_id')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -146,11 +161,11 @@
                                 </div>
 
                                 <div class="flex items-center">
-                                    <label for="employee_status">Industry</label>
+                                    <label for="employee_status">Tanggal Kematian</label>
                                     <span class="text-red-500 text-sm">*</span>
                                 </div>
                                 <div class="grid col-span-3">
-                                    <input x-model="deathdata.deathdata" class="rounded-md border border-gray-300 p-2" type="date" name="deathdate" id="deathdate" value="{{ old('deathdate') }}">
+                                    <input x-model="deathdata.deathdate" class="rounded-md border border-gray-300 p-2" type="date" name="deathdate" id="deathdate" value="{{ old('deathdate') }}">
 
                                     @error('deathdate')
                                         <div class="text-red-400 text-xs">{{ $message }}</div>

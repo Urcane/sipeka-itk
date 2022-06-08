@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => '/family_card'], function() {
         Route::get('/', [FamilyCardController::class, "index"])->name('family_card.index');
         Route::post('/', [FamilyCardController::class, "store"])->name('family_card.store');
-        Route::put('/update', [FamilyCardController::class, "update"])->name('family_card.update');
+        // Route::put('/update', [FamilyCardController::class, "update"])->name('family_card.update');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

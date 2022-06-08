@@ -58,7 +58,35 @@ class DeathDataTable extends LivewireDatatable
             Column::name('address')
                 ->minWidth(200)
                 ->maxWidth(200)
-                ->label('Alamat')
+                ->label('Alamat'),
+
+            Column::callback([
+                'death_data.id', 
+                'full_name', 
+                'family_card_id', 
+                'family_cards.family_card_number',
+                'NIK',
+                'religion',
+                'birth_place',
+                'birthdate',
+                'deathdate',
+                'address',
+            ], function ($id, $full_name, $family_card_id, $family_card_number,$NIK, $religion, $birth_place, $birthdate, $deathdate, $address) {
+                return view('components.deathdata-action', [
+                    'id' => $id, 
+                    'full_name' => $full_name, 
+                    'family_card_id' => $family_card_id, 
+                    'family_card_number' => $family_card_number,
+                    'NIK' => $NIK,
+                    'religion' => $religion,
+                    'birth_place' => $birth_place,
+                    'birthdate' => $birthdate,
+                    'deathdate' => $deathdate,
+                    'address' => $address 
+                ]);
+            })
+                ->label('Action')
+                ->alignCenter(),
         ];
     }
 }
