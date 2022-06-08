@@ -225,7 +225,7 @@
             </div>
             <!-- /overlay -->
 
-            <main
+        <main
             x-data="{ selectedId: @entangle('selected'), deletingState: false, deleteConfirmState: false}"
             @keydown.escape="deletingState = false"
             x-on:show-confirmation.window="selectedId = event.detail.selectedIds; deletingState = true"
@@ -243,7 +243,7 @@
                 <div
                     class="overflow-auto"
                     style="background-color: rgba(0,0,0,0.5)"
-                    :class="{ 'fixed inset-0 z-10 flex items-center justify-center': deletingState }"   
+                    :class="{ 'fixed inset-0 z-40 flex items-center justify-center': deletingState }"   
                 >
                     <!-- dialog -->
                     <div
@@ -264,7 +264,7 @@
                             <button type="button" 
                                     class="bg-green-500 px-6 py-2 rounded-md text-white font-semibold focus:outline-none focus:ring-2 focus:ring-blue-200 grid mr-5"
                                     :class="deleteConfirmState ? 'grid-cols-2 px-6 cursor-not-allowed disabled:opacity-40' : 'px-10'"
-                                    x-on:click="deleteConfirmState = true; $wire.deleteFamilyCard(selectedId);"
+                                    x-on:click="deleteConfirmState = true; $wire.deleteDeathdata(selectedId);"
                                     x-bind:disabled="deleteConfirmState"
                                 >
                                 <svg x-show="deleteConfirmState" class="z-10 animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
